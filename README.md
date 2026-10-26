@@ -1,31 +1,29 @@
 # Note App
 
-A small Node.js command-line application for creating, listing, searching, and deleting notes.
+A small Node.js command-line app for creating, viewing, searching, and deleting notes. Notes are saved locally in `db.json`.
 
-## Features
+## Requirements
 
-- Add a new note with optional tags
-- View all saved notes
-- Search notes by content
-- Remove a single note by ID
-- Clear all notes
-- Store notes in a local JSON database
-
-## Project structure
-
-- `index.js` – entry point for the CLI
-- `src/command.js` – command parsing and CLI commands
-- `src/notes.js` – note logic
-- `src/db.js` – JSON database helpers
-- `db.json` – persistent note storage
+- Node.js
+- npm
 
 ## Installation
+
+Install the project dependencies:
 
 ```bash
 npm install
 ```
 
-If you want to run the CLI globally from your terminal, link the package:
+## Tests
+
+Run the test suite with:
+
+```bash
+npm test
+```
+
+Run commands from the project directory with `node index.js`. To use the `note` command directly, link the package globally:
 
 ```bash
 npm link
@@ -33,39 +31,47 @@ npm link
 
 ## Usage
 
-### Create a note
+Create a note:
 
 ```bash
-note new "Buy groceries" --tags shopping,home
+node index.js new "Buy groceries"
 ```
 
-### List all notes
+Add comma-separated tags:
 
 ```bash
-note all
+node index.js new "Buy groceries" --tags shopping,home
 ```
 
-### Search notes
+List all notes:
 
 ```bash
-note find "groceries"
+node index.js all
 ```
 
-### Remove a note
+Search note content (case-insensitive):
 
 ```bash
-note remove 1720000000000
+node index.js find groceries
 ```
 
-### Remove all notes
+Remove a note by its ID, shown when the note is created or listed:
 
 ```bash
-note clean
+node index.js remove 1720000000000
 ```
 
-## Notes storage
+Delete all notes:
 
-The app stores notes in `db.json` in the project root. The structure looks like this:
+```bash
+node index.js clean
+```
+
+After running `npm link`, you can replace `node index.js` in these examples with `note`.
+
+## Data storage
+
+Notes are stored in the project-root `db.json` file:
 
 ```json
 {
@@ -77,10 +83,4 @@ The app stores notes in `db.json` in the project root. The structure looks like 
     }
   ]
 }
-```
-
-## Run directly without linking
-
-```bash
-node index.js new "Write README"
 ```
